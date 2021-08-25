@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useParams,Link, useHistory } from 'react-router-dom';
 
 const Detalles = () => {
-    const [pelicula, setPelicula] = React.useState([])
-    const [noEncontrada, setNoEncontrada] = React.useState(false)
+    const [pelicula, setPelicula] = useState([])
+    const [noEncontrada, setNoEncontrada] = useState(false)
+    const [cargando, setCargando] = useState(true)
     const {id} = useParams() 
     const history = useHistory()
-
 
     const volver = (e)=>{
       e.preventDefault();
@@ -19,19 +19,26 @@ const Detalles = () => {
         const date = await obtenerId.json();
         const pelis = await date;
         setPelicula([pelis])
+        setCargando(false)
       }else {
         setNoEncontrada(true)
       }
     }
-
- 
-    React.useEffect(() => {
+    useEffect(() => {
          data()
-    },[])
+    },[id])
     return (
-        <div className="d-flex justify-content-center mx-4 row">
+
+     <div className="d-flex justify-content-center  mt-2 mx-2 row">
+       
+       {cargando?(
+       <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>):(
+
+      <div >
           {noEncontrada === true ?
-          <div className="mt-5"> <h1>Por ahora no hay detalles de esta pelicula</h1>
+          <div className="mt-5 "> <h1>Por ahora no hay detalles de esta pelicula</h1>
           <Link to={'/'} style={{"width":"150px"}} className="btn btn-dark mb-5">Volver al listado</Link> 
             <div className="text-center">
             <lord-icon
@@ -46,14 +53,14 @@ const Detalles = () => {
             {
             pelicula.map(peli => {
               return  (
-                <div key={peli.id} className="p-0 m-2 col-12" style={{"width": "100%vh"}}>
+                <div key={peli.id} className="col-12 container" style={{"width": "100%vh"}}>
                  <div className="row">
-                   <div className="col-4">
-                    <img src={`https://image.tmdb.org/t/p/w500${peli.poster_path}`} className="img-fluid rounded-start" alt={peli.title}/>
+                   <div className="col-md-5">
+                    <img src={`https://image.tmdb.org/t/p/w500${peli.poster_path}`}  className="img-fluid rounded-start shadow"  alt={peli.title}/>
                    </div>
-                  <div className="col-md-7">
-                  <div className="card-body d-flex flex-column">
+                  <div className="card-body col-md-7">
                     <h1 className="title">{peli.title || peli.name }</h1>
+                    <p>{peli.release_date}</p>
                     {
                       peli.geners ?
                       <div>
@@ -78,14 +85,26 @@ const Detalles = () => {
                     }
                     <h3>Reseña:</h3>
                      <p className="overflow-auto card-text" >{peli.overview}</p>
-                    <button className="btn btn-dark " onClick={volver}>Volver al Listado</button>
+                     <a href={peli.homepage} rel = "noreferrer" target="_blank" className="btn btn-outline-info">Pagina oficial</a>
+                    <div className="d-flex flex-wrap">
+                      {
+                      peli.production_companies.map(companies =>{
+                            return (
+                            <div key={companies.name}>
+                              <img alt={peli.name} className="mx-3 mt-3" style={{width:'80px'}} src={companies.logo_path !== null ? `https://image.tmdb.org/t/p/w500${companies.logo_path}`:null}/>
+                             </div>
+                          )})}
+                      </div>
+                    <button className="btn btn-dark mt-5" onClick={volver}>Volver al Listado</button>
                    </div>
-                  </div>
+                    
                  </div>
                 </div>
             )})
              }
+        </div>)}
         </div>
+        
     );
 }
 

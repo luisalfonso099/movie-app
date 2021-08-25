@@ -9,12 +9,11 @@ import Buscar from "./components/Buscar";
 import Detalles from "./components/Detalles";
 import NavBar from "./components/NavBar";
 import Tendencias from "./components/Tendencias";
-import Generos from "./components/Generos";
 
 function App() {
 
   return (
-    <>
+    <div className="bg-light">
     <Router >
         <NavBar/>
         <Switch>
@@ -24,15 +23,12 @@ function App() {
          <Route path="/detalles/:id"> 
             <Detalles/>
           </Route>
-          <Route path="/generos"> 
-            <Generos/>
-          </Route>
           <Route path="/" exact>
              <Tendencias/>
           </Route>
         </Switch>
     </Router>
-    </>
+    </div>
   );
 }
 
