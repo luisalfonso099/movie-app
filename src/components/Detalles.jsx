@@ -84,8 +84,8 @@ const Detalles = () => {
                         null
                     }
                     <h3>Reseña:</h3>
-                     <p className="overflow-auto card-text" >{peli.overview}</p>
-                     <a href={peli.homepage} rel = "noreferrer" target="_blank" className="btn btn-outline-info">Pagina oficial</a>
+                     <p className="overflow-auto card-text fs-3">{peli.overview}</p>
+                     <a href={peli.homepage} rel = "noreferrer" target="_blank" className="btn btn-outline-light">Pagina oficial</a>
                     <div className="d-flex flex-wrap">
                       {
                       peli.production_companies.map(companies =>{
@@ -95,7 +95,7 @@ const Detalles = () => {
                              </div>
                           )})}
                       </div>
-                    <button className="btn btn-dark mt-5" onClick={volver}>Volver al Listado</button>
+                    <button className="btn btn-dark mt-5" onClick={volver}>Volver al listado</button>
                    </div>
                     
                  </div>

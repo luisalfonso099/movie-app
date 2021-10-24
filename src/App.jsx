@@ -13,7 +13,7 @@ import Tendencias from "./components/Tendencias";
 function App() {
 
   return (
-    <div className="bg-light">
+    <div className="bg-app">
     <Router >
         <NavBar/>
         <Switch>

@@ -19,12 +19,12 @@ const NavBar = () => {
             <nav className=" btn-group navbar navbar-expand-lg navbar-light bg-dark">
                <div className="container-fluid container">
                  <div className="d-flex">
-                 <Link to="/" className="navbar-brand text-light d-flex aling-items-center">
+                 <Link to="/" className="navbar-brand text-light d-flex fs-2 aling-items-center">
                   <lord-icon
                       src="https://cdn.lordicon.com/rzrkjbrm.json"
                       trigger="hover"
                       colors="primary:#ffffff,secondary:#9ce5f4"
-                      style={{"width":"100"}}>
+                      style={{"height":"100"}}>
                   </lord-icon>
                       Inicio
                   </Link>

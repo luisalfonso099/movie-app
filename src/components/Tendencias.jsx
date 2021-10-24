@@ -17,17 +17,16 @@ const Tendencias = () => {
         
         <div >
             <div className="d-flex justify-content-center m-0 row d-flex p-0">
-            <h1 className="text-center my-5">Tendencias</h1>
+            <h1 className="text-center text-light title my-5">Tendencias</h1>
             {
             tendencias.map(peli => {
               return  (
                 <div key={peli.id} className="p-0 card shadow m-2 col-4" style={{"width": "20rem"}}>
-                 <img src={`https://image.tmdb.org/t/p/w500${peli.poster_path}`} style={{"height":"500px"}} className="card-img-top" alt={peli.title}/>
-                  <div className="card-body">
-                    <h5 className="card-title" style={{height:'60px'}}>{peli.title || peli.name }</h5>
-                     <p className="overflow-hidden card-text" style={{"height":"80px"}}>{peli.overview}</p>
-                     <Link to={`/detalles/${peli.id || peli.belongs_to_collection.id}`} className="btn btn-info ">Detalles</Link>
-                   </div>
+                     <Link to={`/detalles/${peli.id || peli.belongs_to_collection.id}`} >
+                     <img src={`https://image.tmdb.org/t/p/w500${peli.poster_path}`} style={{"height":"500px"}} className="card-img-top" alt={peli.title}/>
+
+                       
+                     </Link>
                 </div>
             )}) }
 
